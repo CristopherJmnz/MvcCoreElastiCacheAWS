@@ -32,15 +32,11 @@ namespace MvcCoreElastiCacheAWS.Services
         public async Task AddCocheFavoritoAsync(Coche car)
         {
             List<Coche> coches = await this.GetCochesFavoritosAsync();
-            //SI NO EXISTEN COCHES FAVORITOS TODAVIA, CREAMOS 
-            //LA COLECCION
             if (coches == null)
             {
                 coches = new List<Coche>();
             }
-            //AÑADIMOS EL NUEVO COCHE A LA COLECCION
             coches.Add(car);
-            //SERIALIZAMOS A JSON LA COLECCION
             string jsonCoches = JsonConvert.SerializeObject(coches);
             await this.cache.SetStringAsync("cochesfavoritos"
                 , jsonCoches);

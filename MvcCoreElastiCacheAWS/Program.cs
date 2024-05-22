@@ -10,9 +10,10 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<CochesRepository>();
 builder.Services.AddTransient<AWSCacheService>();
+string connectionStringRedis = builder.Configuration.GetConnectionString("CacheRedis");
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.Configuration = "cache-coches.1luavn.ng.0001.use1.cache.amazonaws.com:6379";
+    options.Configuration = connectionStringRedis;
     options.InstanceName = "cache-coches";
 });
 var app = builder.Build();
