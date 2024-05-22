@@ -11,6 +11,7 @@ namespace MvcCoreElastiCacheAWS.Controllers
         private AWSCacheService service;
         public CochesController(CochesRepository repo, AWSCacheService service)
         {
+            this.service = service;
             this.repo = repo;
         }
         public IActionResult Index()
