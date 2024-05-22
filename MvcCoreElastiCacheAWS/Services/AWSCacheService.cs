@@ -30,7 +30,7 @@ namespace MvcCoreElastiCacheAWS.Services
         public async Task AddCocheFavoritoAsync(Coche car)
         {
             List<Coche> cars = await this.GetCochesFavoritosAsync();
-            if (cars != null)
+            if (cars == null)
             {
                 cars = new List<Coche>();
             }
@@ -47,16 +47,16 @@ namespace MvcCoreElastiCacheAWS.Services
             {
                 Coche carDelete = cars.FirstOrDefault(x => x.IdCoche == idcoche);
                 cars.Remove(carDelete);
-            }
-            if (cars.Count == 0)
-            {
-                await this.cache.KeyDeleteAsync("cochesfavoritos");
-            }
-            else
-            {
-                string jsonCoches = JsonConvert.SerializeObject(cars);
-                await this.cache.StringSetAsync
-                    ("cochesfavoritos", jsonCoches, TimeSpan.FromMinutes(30));
+                if (cars.Count == 0)
+                {
+                    await this.cache.KeyDeleteAsync("cochesfavoritos");
+                }
+                else
+                {
+                    string jsonCoches = JsonConvert.SerializeObject(cars);
+                    await this.cache.StringSetAsync
+                        ("cochesfavoritos", jsonCoches, TimeSpan.FromMinutes(30));
+                }
             }
         }
     }
