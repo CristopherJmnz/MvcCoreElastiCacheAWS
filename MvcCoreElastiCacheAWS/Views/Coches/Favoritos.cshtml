@@ -1,0 +1,30 @@
+﻿@model IEnumerable<MvcCoreElastiCacheAWS.Models.Coche>
+
+@{
+    ViewData["Title"] = "Favoritos";
+}
+
+<h1>Favoritos</h1>
+@if (Model != null)
+{
+    <ul class="list-group">
+        @foreach (Coche car in Model)
+        {
+            <li class="list-group-item">
+                <img src="@car.Imagen" />
+                <p>@car.Marca</p>
+                <p>@car.Modelo</p>
+                <a class="btn btn-danger"
+                   asp-controller="Coches"
+                   asp-action="DeleteFavorito"
+                   asp-route-idcoche="@car.IdCoche">
+                    Eliminar
+                </a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No hay favoritos</p>
+}

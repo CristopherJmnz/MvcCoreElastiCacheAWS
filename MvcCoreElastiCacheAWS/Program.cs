@@ -1,4 +1,5 @@
 using MvcCoreElastiCacheAWS.Repository;
+using MvcCoreElastiCacheAWS.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<CochesRepository>();
+builder.Services.AddTransient<AWSCacheService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

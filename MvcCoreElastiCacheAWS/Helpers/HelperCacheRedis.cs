@@ -8,10 +8,12 @@ namespace MvcCoreElastiCacheAWS.Helpers
             createConnection=new Lazy<ConnectionMultiplexer>(() =>
             {
                 //aqui va la connecton string
-                return ConnectionMultiplexer.Connect("");
+                string connectionString = 
+                "cache-coches.1luavn.ng.0001.use1.cache.amazonaws.com:6379";
+                return ConnectionMultiplexer.Connect(connectionString);
             });
         
-        public ConnectionMultiplexer ConnectionMultiplexer
+        public static ConnectionMultiplexer Connection
         {
             get
             {

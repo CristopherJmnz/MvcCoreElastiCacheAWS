@@ -22,26 +22,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Marca)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Modelo)
-            </td>
-            <td>
-                <img src="@item.Imagen" style="width:auto; max-width:300px;"/>
-            </td>
-            <td>
-                <a class="btn btn-danger"
-                asp-controller="Coches"
-                asp-action="Details"
-                asp-route-id="@item.IdCoche">
-                    DETAILS
-                </a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Modelo)
+                </td>
+                <td>
+                    <img src="@item.Imagen" style="width:auto; max-width:300px;" />
+                </td>
+                <td>
+                    <a class="btn btn-danger"
+                       asp-controller="Coches"
+                       asp-action="Details"
+                       asp-route-id="@item.IdCoche">
+                        DETAILS
+                    </a>
+                    <a class="btn btn-danger"
+                       asp-controller="Coches"
+                       asp-action="SeleccionarFavorito"
+                       asp-route-idcoche="@item.IdCoche">
+                        ⭐
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
