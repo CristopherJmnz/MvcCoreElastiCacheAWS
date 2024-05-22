@@ -16,12 +16,15 @@ namespace MvcCoreElastiCacheAWS.Services
         public async Task<List<Coche>> GetCochesFavoritosAsync()
         {
             string jsonCoches = await this.cache.StringGetAsync("cochesfavoritos");
-            if (jsonCoches != null)
+            if (jsonCoches == null)
+            {
+                return null;
+            }
+            else
             {
                 List<Coche> cars = JsonConvert.DeserializeObject<List<Coche>>(jsonCoches);
                 return cars;
             }
-            return null;
         }
 
         public async Task AddCocheFavoritoAsync(Coche car)
